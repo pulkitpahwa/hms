@@ -22,7 +22,7 @@ class Student(models.Model):
             ('15', "2015"),
             ('16', '2016'),
         )
-    enrollment_id = models.OneToOneField(User)
+    enrollment_id = models.OneToOneField(User, primary_key = True)
     name = models.CharField(max_length = 30)
     course = models.CharField(max_length = 20, choices = course_choice)
     batch = models.CharField(max_length = 4, choices = batch_choice)
