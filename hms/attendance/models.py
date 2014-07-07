@@ -1,10 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User
 from profiles.models import Student, Staff, HostelStaff
 
-class Holidays(models.Model)
+import datetime
+
+class Holidays(models.Model) : 
     date = models.DateField()
 
-class Outpass(models.Model):
+class Outpass(models.Model) :
     permission_choice = (
             ('Y','Yes'),
             ('N','No'),
@@ -29,10 +32,10 @@ class Attendance(models.Model):
             ('NA',"N/A"),
         )
     enrollment_id = models.OneToOneField(User)
-    date = models.DateField(initial=datetime.date.today)
-    present = models.CharField(choice = present_choice, max_length = 2)
-    absent = models.CharField(choice = outpass_choice, max_length = 2) 
-    outpass = models.CharField(choice = outpass_choice, max_length = 2) 
+    date = models.DateField( default = datetime.date.today)
+    present = models.CharField(choices = present_choice, max_length = 2)
+    absent = models.CharField(choices = outpass_choice, max_length = 2) 
+    outpass = models.CharField(choices = outpass_choice, max_length = 2) 
 
 
 

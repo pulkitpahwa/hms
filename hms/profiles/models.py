@@ -1,9 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
-class Choices(models.Model):
-    course_choice = (
+course_choice = (
             ('CSE', "B.Tech CSE"),
             ('ECE', "B.Tech ECE"),
             ('MAE', "B.Tech MAE"),
@@ -15,7 +13,7 @@ class Choices(models.Model):
             ('BCA', "BCA"),
             ('Biotech', "B.Tech Biotech"),
         )
-    batch_choice = (
+batch_choice = (
             ('11', "2011"),
             ('12', "2012"),
             ('13', "2013"),
@@ -24,7 +22,7 @@ class Choices(models.Model):
             ('16', '2016'),
         )
 
-class Student(Choices) :
+class Student(models.Model) :
     enrollment_id = models.OneToOneField(User, primary_key = True)
     name = models.CharField(max_length = 30)
     course = models.CharField(max_length = 20, choices = course_choice)
@@ -45,7 +43,7 @@ class Student(Choices) :
 
 #Register only HOD, mentors, coordinators and some teachers who stay in hostel or have good terms with students
 
-class Staff(Choices):
+class Staff(models.Model):
     staff_id = models.OneToOneField(User)
     name = models.CharField("Name", max_length = 20)
     contact = models.CharField("Contact Number", max_length = 12)
@@ -56,7 +54,7 @@ class Staff(Choices):
     position = models.CharField("Current Position", max_length = 20, help_text = "e.g. : HOD, Faculty, etc.")
 
 
-class HostelStaff(Choices):
+class HostelStaff(models.Model):
     staff_id = models.OneToOneField(User)
     name = models.CharField("Name", max_length = 20)
     contact = models.CharField("Contact Number", max_length = 12)
