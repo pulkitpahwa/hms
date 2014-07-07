@@ -78,6 +78,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'profiles',
+    'attendance',
 )
 
 LOGGING = {
