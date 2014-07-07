@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Student(models.Model):
+
+class Choices(models.Model):
     course_choice = (
             ('CSE', "B.Tech CSE"),
             ('ECE', "B.Tech ECE"),
@@ -22,6 +23,8 @@ class Student(models.Model):
             ('15', "2015"),
             ('16', '2016'),
         )
+
+class Student(Choices) :
     enrollment_id = models.OneToOneField(User, primary_key = True)
     name = models.CharField(max_length = 30)
     course = models.CharField(max_length = 20, choices = course_choice)
@@ -40,5 +43,24 @@ class Student(models.Model):
     email = models.EmailField("Email Address")
 
 
+#Register only HOD, mentors, coordinators and some teachers who stay in hostel or have good terms with students
+
+class Staff(Choices):
+    staff_id = models.OneToOneField(User)
+    name = models.CharField("Name", max_length = 20)
+    contact = models.CharField("Contact Number", max_length = 12)
+    branch1 = models.CharField("Branch I Teach: First Branch ", max_length = 20, choices = course_choice)
+    branch2 = models.CharField("Branch I Teach: Second branch", max_length = 20, choices = course_choice, blank = True, null = True)
+    branch3 = models.CharField("Branch I Teach: Third branch", max_length = 20, choices = course_choice, blank = True, null = True)
+    address = models.CharField("Current address", max_length = 50)
+    position = models.CharField("Current Position", max_length = 20, help_text = "e.g. : HOD, Faculty, etc.")
+
+
+class HostelStaff(Choices):
+    staff_id = models.OneToOneField(User)
+    name = models.CharField("Name", max_length = 20)
+    contact = models.CharField("Contact Number", max_length = 12)
+    address = models.CharField("Current address", max_length = 50)
+    position = models.CharField("Current Position", max_length = 20, help_text = "e.g. : Warden, Deputy Director Hostel, etc.")
 
 
