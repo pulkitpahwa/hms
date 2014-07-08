@@ -9,14 +9,14 @@ class StudentAdmin(admin.ModelAdmin):
 
 class StaffAdmin(admin.ModelAdmin):
     list_display=('staff_id', 'name','branch1','contact')
-    list_filter = ['name', 'batch1']
+    list_filter = ['name', 'branch1']
     search_fields = ['staff_id', 'name', 'branch1']
 
-class StaffAdmin(admin.ModelAdmin):
+class HostelStaffAdmin(admin.ModelAdmin):
     list_display=('staff_id', 'name','position','contact')
     list_filter = ['name', 'position']
     search_fields = ['staff_id', 'name', 'position']
 
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Staff, StaffAdmin)
-admin.site.register(HosteStaff, HostelStaffAdmin)
+admin.site.register(HostelStaff, HostelStaffAdmin)
