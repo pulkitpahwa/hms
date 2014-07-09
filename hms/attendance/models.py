@@ -31,6 +31,11 @@ class Outpass(models.Model) :
     outpass_generated = models.DateTimeField("Outpass generated at" ) # fill it in views.py file. WHen the form is completely filled and the outpass could be generated i.e. permission is not required, then outpass_generated = true
     outpass_save_mode = models.CharField(max_length = 3, choices = save_choice) #checks how the outpass is saved i.e. SMS or pdf
 
+    def is_permission_required(self):
+        holidays = holidays.objects.filter(date__gte = datetime.datetime.now(),date__lte = return_time)
+        if return_time >  datetime.
+        
+
 #fields to be filled by the user :from_time, to_time 
 #fields to be auto-filled in views.py : enrollment_id, outpass_id, permission_required, permission_granted_by, permission_granted_by_hostel_staff, outpass_generated, outpass_save_mode
 
