@@ -22,9 +22,16 @@ batch_choice = (
             ('16', '2016'),
         )
 
+sex_choice = (
+        ('F','Female'),
+        ('M','Male'),
+        )
+
+
 class Student(models.Model) :
     enrollment_id = models.OneToOneField(User, primary_key = True)
     name = models.CharField(max_length = 30)
+    sex = models.CharField(max_length = 1, choices = sex_choice )
     course = models.CharField(max_length = 20, choices = course_choice)
     batch = models.CharField(max_length = 4, choices = batch_choice)
     father_name = models.CharField("Father's Name", max_length = 30, blank = True, null = True)
@@ -34,9 +41,9 @@ class Student(models.Model) :
     local_guardian = models.CharField("Local Guardian's Name", max_length = 30, blank = True, null = True)
     local_guardian_number = models.CharField("Local Guardian's Number", max_length = 12, blank = True, null = True)
     permanent_address = models.CharField("Permanent address", max_length = 50)  
-    city = models.CharField("CITY", max_length = 30)
+    city = models.CharField("City", max_length = 30)
     country = models.CharField("Country", max_length = 20)
-    hostel_address = models.CharField("Hostel address", max_length = 5,)
+    hostel_address = models.CharField("Hostel address", max_length = 5,help_text = "Address format e.g : C441, A221, etc:")
     local_guardian_addres = models.CharField("Local Guardian's Address", max_length = 50, blank = True, null = True)
     email = models.EmailField("Email Address")
 
