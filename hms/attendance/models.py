@@ -34,7 +34,7 @@ class Outpass(models.Model) :
 
     def is_permission_required(self):
         holidays = holidays.objects.filter(date__gte = datetime.datetime.now(),date__lte = return_time)
-        if (return_time - from_time) >  datetime.timedelta(1):
+    #    if (return_time - from_time) >  datetime.timedelta(1):
 
 
     #function to check whether the girl permission is required. If the girl permission is required, outpass_state = waiting state

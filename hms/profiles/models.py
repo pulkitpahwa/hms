@@ -27,11 +27,22 @@ sex_choice = (
         ('M','Male'),
         )
 
-
-class Student(models.Model) :
+class Person(models.Model):
     enrollment_id = models.OneToOneField(User, primary_key = True)
     name = models.CharField(max_length = 30)
     sex = models.CharField(max_length = 1, choices = sex_choice )
+    permanent_address = models.CharField("Permanent address", max_length = 100)  
+    city = models.CharField("City", max_length = 30)
+    country = models.CharField("Country", max_length = 20)
+    email = models.EmailField("Email Address")
+    contact = models.CharField("Contact Number", max_length = 12)
+
+    class Meta:
+        abstract = True
+
+
+
+class Student(Person) :
     course = models.CharField(max_length = 20, choices = course_choice)
     batch = models.CharField(max_length = 4, choices = batch_choice)
     father_name = models.CharField("Father's Name", max_length = 30, blank = True, null = True)
@@ -40,32 +51,22 @@ class Student(models.Model) :
     mother_number = models.CharField("Mother's Contact Number", max_length = 12)
     local_guardian = models.CharField("Local Guardian's Name", max_length = 30, blank = True, null = True)
     local_guardian_number = models.CharField("Local Guardian's Number", max_length = 12, blank = True, null = True)
-    permanent_address = models.CharField("Permanent address", max_length = 50)  
-    city = models.CharField("City", max_length = 30)
-    country = models.CharField("Country", max_length = 20)
     hostel_address = models.CharField("Hostel address", max_length = 5,help_text = "Address format e.g : C441, A221, etc:")
     local_guardian_addres = models.CharField("Local Guardian's Address", max_length = 50, blank = True, null = True)
-    email = models.EmailField("Email Address")
 
 
 #Register only HOD, mentors, coordinators and some teachers who stay in hostel or have good terms with students
 
-class Staff(models.Model):
-    staff_id = models.OneToOneField(User)
-    name = models.CharField("Name", max_length = 20)
-    contact = models.CharField("Contact Number", max_length = 12)
+class Staff(Person):
     branch1 = models.CharField("Branch I Teach: First Branch ", max_length = 20, choices = course_choice)
     branch2 = models.CharField("Branch I Teach: Second branch", max_length = 20, choices = course_choice, blank = True, null = True)
     branch3 = models.CharField("Branch I Teach: Third branch", max_length = 20, choices = course_choice, blank = True, null = True)
-    address = models.CharField("Current address", max_length = 50)
+    address = models.CharField("Current address", max_length = 100)
     position = models.CharField("Current Position", max_length = 20, help_text = "e.g. : HOD, Faculty, etc.")
 
 
-class HostelStaff(models.Model):
-    staff_id = models.OneToOneField(User)
-    name = models.CharField("Name", max_length = 20)
-    contact = models.CharField("Contact Number", max_length = 12)
-    address = models.CharField("Current address", max_length = 50)
+class HostelStaff(Person):
+    address = models.CharField("Hostel address", max_length = 5, help_text = "e.g : A01, B02")
     position = models.CharField("Current Position", max_length = 20, help_text = "e.g. : Warden, Deputy Director Hostel, etc.")
 
 
