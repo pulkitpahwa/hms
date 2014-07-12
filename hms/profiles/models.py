@@ -5,9 +5,9 @@ course_choice = (
             ('CSE', "B.Tech CSE"),
             ('ECE', "B.Tech ECE"),
             ('MAE', "B.Tech MAE"),
-            ('EEE', "B.Tech EEE"), 
-            ('IT', "B.Tech IT"), 
-            ('Civil', "B.Tech CIVIL"), 
+            ('EEE', "B.Tech EEE"),
+            ('IT', "B.Tech IT"),
+            ('Civil', "B.Tech CIVIL"),
             ('MBA', "MBA"),
             ('BSCIT', "B.Sc IT"),
             ('BCA', "BCA"),
@@ -25,7 +25,7 @@ batch_choice = (
 sex_choice = (
         ('F','Female'),
         ('M','Male'),
-        )
+    )
 
 class Person(models.Model):
     enrollment_id = models.OneToOneField(User, primary_key = True)
@@ -41,6 +41,7 @@ class Person(models.Model):
         abstract = True
 
 
+#the class student, staff and hostel staff extends the class person. This would help them to get those fields automatically. Thus implementing the DRY principle of Python
 
 class Student(Person) :
     course = models.CharField(max_length = 20, choices = course_choice)
@@ -58,9 +59,9 @@ class Student(Person) :
 #Register only HOD, mentors, coordinators and some teachers who stay in hostel or have good terms with students
 
 class Staff(Person):
-    branch1 = models.CharField("Branch I Teach: First Branch ", max_length = 20, choices = course_choice)
-    branch2 = models.CharField("Branch I Teach: Second branch", max_length = 20, choices = course_choice, blank = True, null = True)
-    branch3 = models.CharField("Branch I Teach: Third branch", max_length = 20, choices = course_choice, blank = True, null = True)
+    branch1 = models.CharField("First Branch I Teach", max_length = 20, choices = course_choice)
+    branch2 = models.CharField("Second branch I Teach", max_length = 20, choices = course_choice, blank = True, null = True)
+    branch3 = models.CharField("Third branch I Teach", max_length = 20, choices = course_choice, blank = True, null = True)
     address = models.CharField("Current address", max_length = 100)
     position = models.CharField("Current Position", max_length = 20, help_text = "e.g. : HOD, Faculty, etc.")
 
