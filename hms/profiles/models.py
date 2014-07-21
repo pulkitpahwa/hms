@@ -35,6 +35,13 @@ class Person(models.Model):
     city = models.CharField("City", max_length = 30)
     country = models.CharField("Country", max_length = 20)
     contact = models.CharField("Contact Number", max_length = 12)
+    email_id = models.EmailField()
+    has_add_holiday_permission = models.BooleanField("Grant add Holiday Permission", default = False)
+    has_delete_holiday_permission = models.BooleanField("Grant delete Holiday Permission", default = False)
+    has_add_outpass_permission = models.BooleanField("Grant add outpass Permission", default = False)
+    has_add_attendance_permission = models.BooleanField("Grant add attendance Permission", default = False)
+    has_update_attendance_permission = models.BooleanField("Grant Update Attendance Permission", default = False)
+
 
     class Meta:
         abstract = True
@@ -42,9 +49,30 @@ class Person(models.Model):
 
 #the class student, staff and hostel staff extends the class person. This would help them to get those fields automatically. Thus implementing the DRY principle of Python
 
+
+class StaffUser(Person):
+    branch1 = models.CharField("First Branch I Teach", max_length = 20, choices = course_choice)
+    branch2 = models.CharField("Second branch I Teach", max_length = 20, choices = course_choice, blank = True, null = True)
+    branch3 = models.CharField("Third branch I Teach", max_length = 20, choices = course_choice, blank = True, null = True)
+    address = models.CharField("Current address", max_length = 100)
+    position = models.CharField("Current Position", max_length = 20, help_text = "e.g. : HOD, Faculty, etc.")
+
+    def __unicode__(self):
+        return self.name
+
+
+class HostelStaff(Person):
+    address = models.CharField("Hostel address", max_length = 5, help_text = "e.g : A01, B02")
+    position = models.CharField("Current Position", max_length = 20, help_text = "e.g. : Warden, Deputy Director Hostel, etc.")
+    
+    def __unicode__(self):
+        return self.name
+
+
 class Student(Person) :
     course = models.CharField(max_length = 20, choices = course_choice)
     batch = models.CharField(max_length = 4, choices = batch_choice)
+    mentor = models.ForeignKey(StaffUser)
     father_name = models.CharField("Father's Name", max_length = 30, blank = True, null = True)
     mother_name = models.CharField("Mother's Name", max_length = 30, blank = True, null = True)
     father_number = models.CharField("Father's Contact Number", max_length = 12)
@@ -60,17 +88,4 @@ class Student(Person) :
 
 
 #Register only HOD, mentors, coordinators and some teachers who stay in hostel or have good terms with students
-
-class Staff(Person):
-    branch1 = models.CharField("First Branch I Teach", max_length = 20, choices = course_choice)
-    branch2 = models.CharField("Second branch I Teach", max_length = 20, choices = course_choice, blank = True, null = True)
-    branch3 = models.CharField("Third branch I Teach", max_length = 20, choices = course_choice, blank = True, null = True)
-    address = models.CharField("Current address", max_length = 100)
-    position = models.CharField("Current Position", max_length = 20, help_text = "e.g. : HOD, Faculty, etc.")
-
-
-class HostelStaff(Person):
-    address = models.CharField("Hostel address", max_length = 5, help_text = "e.g : A01, B02")
-    position = models.CharField("Current Position", max_length = 20, help_text = "e.g. : Warden, Deputy Director Hostel, etc.")
-
 

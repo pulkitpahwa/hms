@@ -1,5 +1,5 @@
+
 import datetime
-from .models import Holidays, Outpass, Attendance
 
 def count_days(start, end):
     ''' Checks the dates that exists between the from_date and return_date and also checks the number of days that lies in between
@@ -41,6 +41,9 @@ def check_date(start_date, start_time, end_date, end_time):
     for day in dates:
         if day not in list_holiday:
             return True
+        
+    else : 
+        return False
 
 
 ##the true returned by this will be used to update whether the permission is required or not

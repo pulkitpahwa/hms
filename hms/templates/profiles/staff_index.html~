@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <h1 style = "color:red;">This page is yet to be styled</h1>
+{% if name %}
+        <li class="navbar-text">Welcome, {{ name.name }}!</li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        {{edit|safe}}
+   {% else %}
+        <li><a href="{% url 'login' %}"><i class="fa fa-angle-double-right"></i> Login</a></li>
+{% endif %}  
+ <ul>
+       <li>Name : {{name}}</li>
+       <li>Enrollment Number : {{name.enrollment_id}}</li>
+       <li>Permanent Address : {{name.permanent_address}}</li>
+       <li>City : {{name.city}}</li>
+       <li>Country : {{name.country}}</li>
+       <li>Contact Number : {{name.contact}}</li>
+       <li>Branch 1 : {{name.branch1}}</li>
+        
+       <li>Branch 2 : {% if name.branch2%}{{name.batch}}{%else %} - {%endif%}</li>
+       <li>Mentor : {{name.mentor}}</li>
+       <li>Father's Name : {{name.address}}</li>
+       <li>Mother's Name : {{name.position}}</li>
+       <li>Local Guardian : {{name.local_guardian}}</li>
+       <li></li>
+       <li></li>
+       <li></li>
+   </ul>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+{% if user.is_authenticated %}
+        <li class="navbar-text">Welcome, {{ user.username }}!</li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+   {% else %}
+        <li><a href="{% url 'register' %}"><i class="fa fa-angle-right"></i> Register</a></li>
+        <li><a href="{% url 'login' %}"><i class="fa fa-angle-double-right"></i> Login</a></li>
+{% endif %}  
+ <ul>
+       <li>Name : {{user}}</li>
+       <li>Enrollment Number : {{user.enrollment_id}}</li>
+       <li>Permanent Address : {{user.permanent_address}}</li>
+       <li>City : {{user.city}}</li>
+       <li>Country : {{user.country}}</li>
+       <li>Contact Number : {{user.contact}}</li>
+       <li>Course : {{user.course}}</li>
+       <li>Batch : {{user.batch}}</li>
+       <li>Mentor : {{user.mentor}}</li>
+       <li>Father's Name : {{user.father_name}}</li>
+       <li>Mother's Name : {{user.mother_name}}</li>
+       <li>Local Guardian : {{user.local_guardian}}</li>
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+   </ul>
+   <a href="/accounts/logout">logout</a>
+</body>
+</html>

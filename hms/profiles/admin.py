@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import Student, Staff, HostelStaff
+from .models import Student, StaffUser, HostelStaff
 
 class StudentAdmin(admin.ModelAdmin):
     list_display=('enrollment_id', 'name','course','batch','father_number','city')
     list_filter = ['course', 'batch']
     search_fields = ['enrollment_id', 'name', 'course','city','country']
 
-class StaffAdmin(admin.ModelAdmin):
+class StaffUserAdmin(admin.ModelAdmin):
     list_display=('enrollment_id', 'name','branch1','contact')
     list_filter = ['name', 'branch1']
     search_fields = ['enrollment_id', 'name', 'branch1']
@@ -18,5 +18,5 @@ class HostelStaffAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Student, StudentAdmin)
-admin.site.register(Staff, StaffAdmin)
+admin.site.register(StaffUser, StaffUserAdmin)
 admin.site.register(HostelStaff, HostelStaffAdmin)

@@ -1,4 +1,8 @@
 # Django settings for hms project.
+import os 
+from django.core.mail import send_mail
+
+SITE_ROOT = os.path.join(os.path.dirname(__file__), '..') 
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -66,6 +70,7 @@ ROOT_URLCONF = 'hms.urls'
 WSGI_APPLICATION = 'hms.wsgi.application'
 
 TEMPLATE_DIRS = (
+    os.path.join(SITE_ROOT, 'templates') ,
 )
 
 INSTALLED_APPS = (
@@ -79,8 +84,9 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'profiles',
     'attendance',
+    'outpas',
 )
-
+LOGIN_URL = '/login/'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
