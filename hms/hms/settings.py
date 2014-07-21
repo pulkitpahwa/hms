@@ -82,6 +82,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'guardian',
+    'widget_tweaks',
+    'braces',
     'profiles',
     'attendance',
     'outpas',
@@ -110,3 +113,9 @@ LOGGING = {
         },
     }
 }
+
+
+ANONYMOUS_USER_ID = -1
+GUARDIAN_RENDER_403 = True
+
+

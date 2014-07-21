@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h2>Attendance details of {{user}}</h2>
+    <table>
+        {% for day in attend %}
+        <tr>
+            <td>{{day.date}}</td>
+            <td>
+                {% if day.present %}Yes
+                {% else %}No
+                {%endif%}
+            </td>
+            <td>{%if day.absent %}Yes <!--include a sad smiley icon here-->
+                {%else%}No
+                {%endif%}
+            </td>
+            <td>{{day.outpass}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+</body>
+</html>

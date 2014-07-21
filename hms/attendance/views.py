@@ -9,12 +9,14 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.generic import DetailView, RedirectView, TemplateView, ListView, UpdateView, CreateView, DeleteView
+from django.contrib.auth.decorators import login_required
+
 from braces.views import SetHeadlineMixin
 
 from .models import Attendance, Holidays
 from .forms import HolidaysCreateForm, HolidaysUpdateForm, AttendanceUpdateForm
+from profiles.models import Student, StaffUser, HostelStaff
 
-from django.contrib.auth.decorators import login_required
 
 # must check elements in the templates, if enrollment_id.sex = F, display the column of permission received from the warden column in the status of outpass. And other features
 
@@ -22,6 +24,7 @@ min_out_time = datetime.time(15,00,00)
 max_in_time  = datetime.time(10,00,00)
 
 #make sure to call this function if any change is made to the holidays object. In short call this inside the update holidays class and create holidays class
+
 def update_holidays():
     holiday = Holidays.objects.all()
     list_holidays = []
@@ -55,15 +58,53 @@ def check_date(start_date, start_time, end_date, end_time):
     else : 
         return False
 
-###########################
+########################### request.user returns the username i.e. enrollment number of the student
 
 @login_required
 def my_attendance(request):
-    a = get_template("index.html")
-    enrollment_id = request.GET['username']
-    c = Context({'user':enrollment_id})
+    try:
+        a = get_template("attendance/index.html")
+        student = Student.objects.get(enrollment_id = request.user)
+        attend = Attendance.objects.filter(enrollment_id = student)
+        c = Context({'attend':attend})
+    except:
+    # design the except phase differently for hostel staff
+        a = get_template("login.html")
+        c = Context({})
     html = a.render(c)
     return HttpResponse(html)	
+
+
+#the permission is only available to the hostel staff to check the attendance of a particular student
+@login_required
+def particular_student(request, username):
+    try:
+        user = User.objects.get(username = request.user)
+        hosteladmin = HostelStaff.objects.get(enrollment_id = user)
+        try:
+            a = get_template("attendance/particular_student.html")
+            user = User.objects.get(username = username)
+            student = Student.objects.get(enrollment_id = user)
+            attend = Attendance.objects.filter(enrollment_id = student)
+            c = Context({'attend':attend, 'user':student})
+        except:
+        # design the except phase differently for hostel staff
+            a = get_template("login.html")
+            c = Context({})
+        html = a.render(c)
+        return HttpResponse(html)	
+    except :
+        return HttpResponse("You dont have enough permissions")
+    
+@login_required
+def daily_attendance(request,year,month,date):
+    
+    day = year+"-"+month+"-"+date
+    daily = Attendance.objects.filter(date = day).order_by('enrollment_id')
+    template = get_template("attendance/daily_attendance.html")
+    c = Context({'daily':daily,'date':day})
+    html = template.render(c)
+    return HttpResponse(html)
 
 
 

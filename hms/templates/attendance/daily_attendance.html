@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h1>Attendance of {{date}}</h1>
+    <h3 style = "color:red;">We will use icons images used in django admin template interface to represent present, absent</h3>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>Present</td>
+            <td>Absent</td>
+            <td>Outpass</td>
+        </tr>
+        {% for person in daily%}
+        <tr>
+            <td>{{person.enrollment_id}}</td>
+            <td>{{person.present}}</td>
+            <td>{{person.absent}}</td>
+            <td>{{person.outpass}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

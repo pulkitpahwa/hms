@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext as _
 from django.views.generic import CreateView, UpdateView, DetailView
 
-from braces.views import LoginRequiredMixin
+from guardian.mixins import LoginRequiredMixin
 
 from .models import Student, StaffUser, HostelStaff
 from .forms import StudentCreateForm, StudentUpdateForm
@@ -51,6 +51,7 @@ class UserInfoMixin(object):
 
 
 class StudentUpdateView(LoginRequiredMixin, ProfileActionMixin, UserInfoMixin, UpdateView):
+#class StudentUpdateView(LoginRequiredMixin, UserInfoMixin, UpdateView):
     
     model = Student
     action = "created"

@@ -26,7 +26,7 @@ sex_choice = (
     )
 
 class Person(models.Model):
-    enrollment_id = models.OneToOneField(User, primary_key = True)
+    enrollment_id = models.ForeignKey(User, primary_key = True)
     name = models.CharField("Name", max_length = 30)
     sex = models.CharField(max_length = 1, choices = sex_choice )
     permanent_address = models.CharField("Permanent address", max_length = 100)  
@@ -82,6 +82,7 @@ class Student(Person) :
 
     def __unicode__(self):
         return self.name
+
 
 
 

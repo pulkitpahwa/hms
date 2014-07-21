@@ -22,6 +22,7 @@ class Attendance(models.Model):
     absent = models.BooleanField(default = False)
     outpass = models.CharField(choices = outpass_choice, max_length = 2) #will be selected if the student generates the outpass
 
+
     #The field value  of present field in the attendance model will be selected from the values received from the file uploaded by the warden daily. The for loop will access every element of the file and will mark present to all those whose names are present in the file
 
 
