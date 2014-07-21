@@ -35,6 +35,7 @@ class Person(models.Model):
     city = models.CharField("City", max_length = 30)
     country = models.CharField("Country", max_length = 20)
     contact = models.CharField("Contact Number", max_length = 12)
+    email_id = models.EmailField()
     has_add_holiday_permission = models.BooleanField("Grant add Holiday Permission", default = False)
     has_delete_holiday_permission = models.BooleanField("Grant delete Holiday Permission", default = False)
     has_add_outpass_permission = models.BooleanField("Grant add outpass Permission", default = False)

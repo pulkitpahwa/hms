@@ -14,12 +14,10 @@ course_choice = (
             ('Biotech', "B.Tech Biotech"),
         )
 batch_choice = (
-            ('11', "2011"),
-            ('12', "2012"),
-            ('13', "2013"),
-            ('14', "2014"),
-            ('15', "2015"),
-            ('16', '2016'),
+            ('2011', "2011"),
+            ('2012', "2012"),
+            ('2013', "2013"),
+            ('2014', "2014"),
         )
 
 sex_choice = (
@@ -28,7 +26,7 @@ sex_choice = (
     )
 
 class Person(models.Model):
-    enrollment_id = models.ForeignKey(User, primary_key = True)
+    enrollment_id = models.OneToOneField(User, primary_key = True)
     name = models.CharField("Name", max_length = 30)
     sex = models.CharField(max_length = 1, choices = sex_choice )
     permanent_address = models.CharField("Permanent address", max_length = 100)  

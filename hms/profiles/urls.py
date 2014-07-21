@@ -4,6 +4,9 @@ from .views import *
 
 urlpatterns = patterns('',
     url(r'^$',view_profile),  #for student, hostel-staff and staff
-    url(r'^add/$',edit_profile),  #for hostel_staff, staff and students
+    url(r'^add/$',StudentCreateView.as_view()),  #for hostel_staff, staff and students
+    #not working
+    url(r'^(?P<pk>[^/]+)/update/$',StudentUpdateView.as_view()),  #for hostel_staff, staff and students
+
 
 )

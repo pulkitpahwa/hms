@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" media = "screen" />
+    <link rel="stylesheet" href="css/bootstrap-responsive.min.css" type = "text/css" />
+
+    <style type="text/css">
+        .top{
+            margin-top:100px;
+        }
+        .button{
+            padding:20px 0px 20px 0px;
+            margin-left:10%;
+            width:90%;
+
+        }
+
+        @media(max-width:800px)
+        {
+            .top{
+                margin-top:0px;
+            }
+            .button{
+                margin-left:5%;
+            }
+
+            .sidebar ul a> li
+            {
+                padding : 5px 0% 5px 5%;
+                margin-right:5%;
+            }
+        }
+            .notices-hidden{
+                margin-top:150px;
+                margin-left:9%;
+                width:85%;
+                height:200px;
+                background-color:yellow;
+                padding : 20px;
+                overflow-y:visible;
+            }
+        
+        
+        .white-link{
+            text-decoration:none;
+            color:white;
+        }
+        .white-link:hover{
+            text-decoration:none;
+            color:white;
+        }
+
+        .sidebar{
+            font-weight:300;
+            font-size:1.5em;
+            font-family:"museo-sans",sans-serif,"helvetica neue",helvetica;
+            max-height:400px;
+        }
+
+        .sidebar ul{
+            margin-top:30px;
+        }
+        .sidebar ul li{
+            display:block;
+            line-height:40px;
+            margin-top:10px;
+            padding:5px 5% 5px 5%;
+            border-radius : 5px;
+        }
+
+        .sidebar a:hover li, .sidebar a:active li{
+            background-color:#e1e2e4;
+        }
+        .sidebar ul a
+        {
+            text-decoration:none;
+        }
+
+        .sidebar-right ul{
+            height:400px;
+            overflow-y:scroll;
+        }
+
+        .notices{
+            width:90%;
+            height:100px;
+            overflow-y:scroll;
+            margin-top:100px;
+            background-color:#e1e2e4;
+        }
+
+    </style>
+
+</head>
+<body>
+    <!---     Navigation bar    --->
+ <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="./index.html">HostelZone</a>
+            <ul class="nav" style = "float:right;">
+              <li class="">
+                <a href="">Hello User</a>
+              </li>
+              <li class="">
+                <a href="">Logout</a>
+              </li>
+            </ul>
+        </div>
+      </div>
+  </div>
+
+  <!--  Left sidebar for the desktop and tablet versions  -->
+  <div class="container-fluid top" >
+        <div class="row-fluid">
+            <div class="span hidden-phone" style = "@media(max-width:1400px){display:none;}"></div>
+            <!-- left sidebar. Contains the navigation features -->
+            <div class="span2 sidebar" style = "height:400px" >
+                <button type="button" class="btn btn-success btn-large button"> 
+                    <a href="" class = "white-link" > Create  </a>
+                </button>
+                
+                <ul>
+                    <a href=""><li>History</li></a>
+                    <a href="index.html"><li>Attendance</li></a>
+                    <a href=""><li>Profile</li></a>
+                    <a href="" class = "hidden-phone"><li>Logout</li></a>
+                    <li class = "hidden-phone"><img src="img/book.png" alt="" /><li>
+                </ul>
+            
+            </div>
+            <!-- center container. Will contain the calendar -->
+
+            <div class="span6 hidden-phone" style = "height:400px"> this will contain the calendar</div>
+
+            <!-- Right sidebar. Will contain the list of holidays scrollbar -->
+            <div class="span3 sidebar sidebar-right hidden-phone">
+
+                <h2>
+                    <center>Upcoming Holidays</center>
+                </h2>
+
+                <ul>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                </ul>
+            </div>
+            <div class="span3 sidebar hidden-tablet hidden-desktop ">
+
+                <h2>
+                    <center>Upcoming Holidays</center>
+                </h2>
+
+                <ul>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                </ul>
+            </div>
+        </div>
+        <div class="span12 notices hidden-phone" ></div>
+        <div class="span12 notices-hidden hidden-tablet hidden-desktop" ></div>
+    </div>
+
+</body>
+<script type="text/javascript" src = "js/jquery.min.js"></script>
+<script type="text/javascript" src = "js/bootstrap.min.js"></script>
+</html>

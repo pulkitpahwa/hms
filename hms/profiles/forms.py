@@ -15,16 +15,16 @@ from .models import Student, StaffUser, HostelStaff
 #only available for student
 
 #for staff and faculty
-class StudentCreateForm(ModelForm):
+class StudentCreateForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields =  ('name','permanent_address','city','country','contact','sex','father_name','mother_name','father_number','mother_number','local_guardian','local_guardian_number','local_guardian_address','hostel_address','course','batch')
+        fields =  ('enrollment_id','name','permanent_address','city','country','contact','sex','father_name','mother_name','father_number','mother_number','local_guardian','local_guardian_number','local_guardian_addres','hostel_address','course','batch')
         
 
-class StudentUpdateForm(ModelForm):
+class StudentUpdateForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields =  ('name','permanent_address','city','country','contact','sex','father_name','mother_name','father_number','mother_number','local_guardian','local_guardian_number','local_guardian_address','hostel_address','course','batch')
+        fields =  ('enrollment_id','name','permanent_address','city','country','contact','sex','father_name','mother_name','father_number','mother_number','local_guardian','local_guardian_number','local_guardian_addres','hostel_address','course','batch')
         
 
 

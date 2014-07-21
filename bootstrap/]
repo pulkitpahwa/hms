@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" media = "screen" />
+    <link rel="stylesheet" href="css/bootstrap-responsive.min.css" type = "text/css" />
+
+    <style type="text/css">
+        .button{
+            padding:10px 40px 20px 20px;
+            margin-left:20px;
+            padding-left:40px;
+            padding-right:40px;
+            width:100%;
+        }
+
+        .white-link{
+            text-decoration:none;
+            color:white;
+        }
+        .white-link:hover{
+            text-decoration:none;
+            color:white;
+        }
+
+        .sidebar{
+            font-weight:300;
+            font-size:1.5em;
+            font-family:"museo-sans",sans-serif,"helvetica neue",helvetica;
+        }
+
+        .sidebar ul li{
+            display:block;
+            line-height:40px;
+            margin-top:1px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <!---     Navigation bar    --->
+ <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="./index.html">HostelZone</a>
+            <ul class="nav" style = "float:right;">
+              <li class="">
+                <a href="" style = "color:white;">Hello User</a>
+              </li>
+            </ul>
+        </div>
+      </div>
+  </div>
+
+  <!--  Left sidebar for the desktop and tablet versions  -->
+  <div class="container-fluid" style = "margin-top:100px;">
+        <div class="row-fluid">
+            <div class="span" style = "@media(max-width:1400px){display:none;}"></div>
+            <!-- left sidebar. Contains the navigation features -->
+            <div class="span2 sidebar">
+                <button type="button" class="btn btn-success btn-large button"> 
+                    <a href="" class = "white-link" > Create  </a>
+                </button>
+                
+                <ul>
+                    <li><a href="">My Outpass History</a></li>
+                    <li><a href="">My Attendance</a></li>
+                    <li><a href="">My Profile</a></li>
+                    <li><a href="">Logout</a></li>
+                    <li><img src="" alt="" /><li>
+                </ul>
+            
+            </div>
+
+            <!-- center container. Will contain the calendar -->
+
+            <div class="span6"></div>
+
+            <!-- Right sidebar. Will contain the list of holidays scrollbar -->
+            <div class="span3"></div>
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript" src = "js/jquery.min.js"></script>
+<script type="text/javascript" src = "js/bootstrap.min.js"></script>
+</html>
