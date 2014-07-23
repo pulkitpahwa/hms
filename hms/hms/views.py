@@ -23,32 +23,27 @@ class StudentUpdate(UpdateView):
 class StudentList(ListView):
     model = Student
 
-#def auth_view(request) :
-#    username = request.POST.get('username','')
-#    password = request.POST.get('password','')
-#    user = auth.authenticate(username = username, password = password)
-#
-#    if user is not None:
-#        auth.login(request, user)
-#        return HttpResponseRedirect('/accounts/loggedin')
-#    else:
-#        return HttpResponseRedirect('/accounts/invalid')
+
+#def staff_permission_received(request):
+# if this function gets called, do the following things :
+#   1 . Delete all the messages that were sent to all the concerned people
+#   2 . set staff_permission_required to false
+#   3 . set permission_received_by to the request.user
+#   4 . if girls_permission_required = false, then for all dates that lie in between the from_date and return_date, set present = no, absent = no, and outpass = true
+#   5 . set outpass_state = P
 
 
-#def loggedin(request):
-#    return render_to_response('loggedin.html',{'fullname':request.user.username})
 
-#def invalid_login(request):
-#    return render_to_response('invalidlogin.html')
+#def hostel_staff_permission_received(request):
+# if this function gets called, do the following things :
+#   1 . Delete all the messages that were sent to all the hostel_warden
+#   2 . set hostel_staff_permission_required to false
+#   3 . set permission_granted_by_hostel_staff to the request.user
+#   4 . if staff_permission_required = false, then for all dates that lie in between the from_date and return_date, set present = no, absent = no, and outpass = true
+#   5 . set outpass_state = P
 
-#def logout(request):
-#    auth.logout(request)
-#    return render_to_response('logout.html')
 
 
-#############################################################################################################333
-
-            
 def user_login(request):
     # Like before, obtain the context for the user's request.
     context = RequestContext(request)

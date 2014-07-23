@@ -25,13 +25,6 @@ max_in_time  = datetime.time(10,00,00)
 
 #make sure to call this function if any change is made to the holidays object. In short call this inside the update holidays class and create holidays class
 
-def update_holidays():
-    holiday = Holidays.objects.all()
-    list_holidays = []
-    for day in holiday :
-        list_holiday.append(day.date.strftime("%Y-%m-%d"))
-
-
 
 def check_date(start_date, start_time, end_date, end_time):
     ''' this function returns whether the permission is required or not.

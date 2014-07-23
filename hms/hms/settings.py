@@ -88,6 +88,7 @@ INSTALLED_APPS = (
     'profiles',
     'attendance',
     'outpas',
+    'msg',
 )
 LOGIN_URL = '/login/'
 LOGGING = {
@@ -118,4 +119,7 @@ LOGGING = {
 ANONYMOUS_USER_ID = -1
 GUARDIAN_RENDER_403 = True
 
-
+try : 
+    from email_settings import *
+except :
+    from local_settings import *

@@ -9,6 +9,9 @@ class Holidays(models.Model) :
     date_of_holiday = models.DateField('Date')
     reason = models.CharField("Reason for Holiday", max_length = 30)
     
+    def __unicode__(self):
+        return self.date_of_holiday.strftime("%Y-%m-%d")
+    
 
 class Attendance(models.Model):
     outpass_choice = (

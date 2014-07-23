@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>Outpass Id</td>
+            <td>Student Name</td>
+            <td>From Date</td>
+            <td>From Time</td>
+            <td>Return Date</td>
+            <td>Going To</td>
+            <td>Reason</td>
+            <td>Outpass State</td>
+        </tr>
+        {% for outpass in outpasses %}
+        <tr>
+            <td>{{outpass.outpass_id}}</td>
+            <td>{{outpass.enrollment_id}}</td>
+            <td>{{outpass.from_date}}</td>
+            <td>{{outpass.from_time}}</td>
+            <td>{{outpass.return_date}}</td>
+            <td>{{outpass.going_to}}</td>
+            <td>{{outpass.reason}}</td>
+            <td>{{outpass.outpass_state}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -10,5 +10,5 @@ urlpatterns = patterns('',
 #    url(r'^add/$',add_attendance),  #only for hostel_staff
 # THE ABOVE URL HANDLES THE UPLOADED CSV OR EXCEL FILE AND PROCESS IT TO UPLOAD ATTENDANCE
 
-#    url(r'^(?P<year>\d{4,4})-(?P<month>\d{4,4})-(?P<date>\d{4,4}/(?P<username>\d{1,7}/update)$',update_attendance),  #only for hostel_staff     to update the attendance of a student
+#    url(r'^(?P<year>\d{4,4})-(?P<month>\d{4,4})-(?P<date>\d{4,4}/(?P<username>\d{1,7}/update)$',update_attendance),  #only for hostel_staff     to update the attendance of a particular student
 )
