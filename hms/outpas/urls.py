@@ -7,8 +7,6 @@ urlpatterns = patterns('',
     url(r'^$',my_all_outpass),  #only for student
     url(r'^create/$',CreateOutpass.as_view()),  #only for student
     url(r'^update$',update_outpass),  #only for student
-    url(r'^success$',success),  #only for student
-    url(r'^failure$',failure),  #only for student
-#    url(r'^check$',check),  #only for student
+#    url(r'^success$',success),  #only for student
  
 )

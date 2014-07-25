@@ -1,33 +1,37 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{%extends "base.html"%}
+
+{% block ninespan %}
+<div class = "span9">
+
     <table>
         <tr>
-            <td>Outpass Id</td>
-            <td>Student Name</td>
-            <td>From Date</td>
-            <td>From Time</td>
-            <td>Return Date</td>
-            <td>Going To</td>
-            <td>Reason</td>
-            <td>Outpass State</td>
+            <th  style = "border:1px solid black;width:5%;">Outpass Id</th>
+            <th  style = "border:1px solid black;width:15%;">Student Name</th>
+            <th  style = "border:1px solid black;width:7%;">From Date</th>
+            <th  style = "border:1px solid black;width:7%;">From Time</th>
+            <th  style = "border:1px solid black;width:7%;">Return Date</th>
+            <th  style = "border:1px solid black;width:5%;">Going To</th>
+            <th  style = "border:1px solid black;width:10%;">Reason</th>
+            <th  style = "border:1px solid black;width:8%;">Staff Permission Granted By</th>
+            {%ifequal outpass.enrollment_id.sex "F"%}
+            <th  style = "border:1px solid black;width:8%;">Girls Hostel Warden Permission Granted By</th>
+            {%endifequal%}
         </tr>
         {% for outpass in outpasses %}
         <tr>
-            <td>{{outpass.outpass_id}}</td>
-            <td>{{outpass.enrollment_id}}</td>
-            <td>{{outpass.from_date}}</td>
-            <td>{{outpass.from_time}}</td>
-            <td>{{outpass.return_date}}</td>
-            <td>{{outpass.going_to}}</td>
-            <td>{{outpass.reason}}</td>
-            <td>{{outpass.outpass_state}}</td>
+            <td  style = "border:1px solid black;width:5%;">{{outpass.outpass_id}}</td>
+            <td  style = "border:1px solid black;width:15%;">{{outpass.enrollment_id}}</td>
+            <td  style = "border:1px solid black;width:7%;">{{outpass.from_date}}</td>
+            <td  style = "border:1px solid black;width:7%;">{{outpass.from_time}}</td>
+            <td  style = "border:1px solid black;width:7%;">{{outpass.return_date}}</td>
+            <td  style = "border:1px solid black;width:5%;">{{outpass.going_to}}</td>
+            <td  style = "border:1px solid black;width:10%;">{{outpass.reason}}</td>
+            <td  style = "border:1px solid black;width:8%;">{{outpass.staff_permission_granted_by}}</td>            
+             {%ifequal outpass.enrollment_id.sex "F"%}
+            <td  style = "border:1px solid black;width:8%;">{{outpass.girl_permission_granted_by}}</td>
+            {%endifequal%}
         </tr>
         {% endfor %}
     </table>
-</body>
-</html>
+</div>
+{%endblock%}

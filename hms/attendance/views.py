@@ -57,7 +57,8 @@ def check_date(start_date, start_time, end_date, end_time):
 def my_attendance(request):
     try:
         a = get_template("attendance/index.html")
-        student = Student.objects.get(enrollment_id = request.user)
+        user = User.objects.get(username = request.user)
+        student = Student.objects.get(enrollment_id = user)
         attend = Attendance.objects.filter(enrollment_id = student)
         c = Context({'attend':attend})
     except:
@@ -93,7 +94,7 @@ def particular_student(request, username):
 def daily_attendance(request,year,month,date):
     
     day = year+"-"+month+"-"+date
-    daily = Attendance.objects.filter(date = day).order_by('enrollment_id')
+    daily = Attendance.objects.filter(date = day)
     template = get_template("attendance/daily_attendance.html")
     c = Context({'daily':daily,'date':day})
     html = template.render(c)

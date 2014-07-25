@@ -1,10 +1,85 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    {{user}}
-</body>
-</html>
+{% extends "base.html" %}
+{% block sixspan %}
+    <div class="span6"> 
+    <div class="span12" style = "height:400px"> this will contain the calendar</div>
+    
+    <div class="span12 hidden-phone" style = "height:100%;border:2px solid black;border-radius:5px;padding-top:0px;">
+        <div style = "background-color:#0044cc; width:100%;height:50px; color:white;margin-top:-10px;border-bottom:2px solid #0f63b2;">
+        <h3>
+            <center>Notices</center>
+        </h3>
+    </div>
+        <ul style = "overflow-y:scroll;height:180px;margin-top:10px;">
+            {% for notice in notices %}
+                <li>{{notice}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="span12 hidden-desktop hidden-tablet" >
+        <div style = "background-color:#0044cc;width:100%;height:50px;color:white;margin-top:-10px;border-bottom:2px solid #0f63b2;">
+        <h3>
+            <center>Notices</center>
+        </h3>
+    </div>
+
+        <ul>
+             {% for notice in notices %}
+                <li>{{notice}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
+
+{%endblock%}
+
+{%block threespan%}
+            <div class="span3 hidden-phone" style = "border:2px solid #0f63b2;border-radius:5px;">
+                <div style = "background-color:#0044cc;width:100%;height:50px;color:white;margin-top:-10px;border-bottom:2px solid #0f63b2;">
+                    <h3>
+                        <center>Messages</center>
+                    </h3>
+                </div>
+                <ul style = "margin-top:20px;">
+                        {% for message in messages %}
+                            <li>{{message.message}}</li>
+                        {% endfor %}
+                </ul>
+                <div style = "background-color:#0044cc;width:100%;height:50px;color:white;">
+                    <h3>
+                        <center>Upcoming Holidays</center>
+                    </h3>
+                </div>
+                <ul style = "margin-top:20px;">
+                        {% for holiday in holiday_list %}
+                            <li>{{holiday.date_of_holiday}} : {{holiday.reason}}</li>
+                        {% endfor %}
+                </ul>
+            </div>
+            <div class="span3 hidden-tablet hidden-desktop ">
+                <div style = "background-color:#0044cc;width:100%;height:50px;color:white;margin-top:10px;">
+                    <h3>
+                        <center>Messages</center>
+                    </h3>
+                </div>
+                <ul style = "margin-top:20px;">
+                        {% for message in messages %}
+                            <li>{{message.message}}</li>
+                        {% endfor %}
+ 
+                </ul>
+                <div style = "background-color:#0044cc;width:100%;height:50px;color:white;margin-top:10px;">
+                    <h3>
+                        <center>Upcoming Holidays</center>
+                    </h3>
+                </div>
+                <ul style = "margin-top:20px;">
+                        {% for holiday in holiday_list %}
+                            <li>{{holiday.date_of_holiday}} : {{holiday.reason}}</li>
+                        {% endfor %}
+                </ul>
+                </ul>
+            </div>
+
+{%endblock%}

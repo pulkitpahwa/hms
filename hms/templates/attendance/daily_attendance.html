@@ -1,27 +1,37 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    <h1>Attendance of {{date}}</h1>
-    <h3 style = "color:red;">We will use icons images used in django admin template interface to represent present, absent</h3>
+{%extends "base.html" %}
+
+{%block ninespan%}
+<div class = "span9">
+    <h3>Attendance of {{date}}</h3>
     <table>
         <tr>
-            <td>Name</td>
-            <td>Present</td>
-            <td>Absent</td>
-            <td>Outpass</td>
-        </tr>
-        {% for person in daily%}
+            <th style = "border:1px solid black;width:15%;">Date</th>
+            <th style = "border:1px solid black;width:15%;">Present</th>
+            <th style = "border:1px solid black;width:15%;">Absent</th>
+            <th style = "border:1px solid black;width:15%;">Outpass</th>
+        </tr>        
+        {% load static from staticfiles%}        
+        {% for day in daily %}
+
         <tr>
-            <td>{{person.enrollment_id}}</td>
-            <td>{{person.present}}</td>
-            <td>{{person.absent}}</td>
-            <td>{{person.outpass}}</td>
+            <td style = "border:1px solid black;">{{day.date}}</td>
+            <td style = "border:1px solid black;">
+                {% if day.present %}
+                <center><img src="{%static 'img/icon_success.gif'%}" alt="" /></center>
+                {% else %}
+                <center><img src="{%static 'img/icon-no.gif'%}" alt="" /></center>
+                {%endif%}
+            </td>
+            <td style = "border:1px solid black;">{%if day.absent %} <!--include a sad smiley icon here-->
+                <center><img src="{%static 'img/icon_success.gif'%}" alt="" /></center>
+                {%else%}
+                <center><img src="{%static 'img/icon-no.gif'%}" alt="" /></center>
+                {%endif%}
+            </td>
+            <td style = "border:1px solid black;">{{day.outpass}}</td>
         </tr>
-        {% endfor %}
+        {%endfor%}
+
     </table>
-</body>
-</html>
+</div>
+{% endblock %}

@@ -100,7 +100,7 @@ def return_message(outpass):
 def all_outpass(request):
 #set permissions so that only hostelstaff can check this out
     a = get_template("outpas/all.html")
-    outpass = Outpass.objects.all().order_by('-outpass_id')
+    outpass = Outpass.objects.filter(outpass_state = "P").order_by('-outpass_id') #can be reduced to outpass.objects.all() to get all the outpass
     c = Context({'outpasses':outpass})
     html = a.render(c)
     return HttpResponse(html)	
@@ -111,8 +111,8 @@ def all_outpass(request):
 def my_all_outpass(request):
 #set permissions so that only student can check this out
     a = get_template("outpas/my_all.html")
-    student = Student.objects.get(enrollment_id = request.oser)
-    my_outpass = Outpass.objects.filter(enrollment_id = student)
+    student = Student.objects.get(enrollment_id = request.user)
+    my_outpass = Outpass.objects.filter(enrollment_id = student).order_by('-outpass_id')
     c = Context({'outpasses':my_outpass})
     html = a.render(c)
     return HttpResponse(html)	
@@ -123,89 +123,101 @@ class CreateOutpass(LoginRequiredMixin, CreateView):
     form_class = OutpassCreateForm
 
 
-    def post(self, request, *args, **kwargs):
     
-        form = self.form_class(request.POST)
-        going_to = request.POST['going_to']
-        reason = request.POST['reason']
-        outpass_save_mode = request.POST['outpass_save_mode']            
-        start_time = create_time(request.POST['from_time'])
-        end_time = create_time(request.POST['return_time'])
-        start_date = create_date(request.POST['from_date'])
-        end_date = create_date(request.POST['return_date'])
-        enrollment_id = Student.objects.get(enrollment_id = self.request.user)
-        outpass_generated = datetime.datetime.now()
-        staff_permission_required = check_date(start_date,start_time, end_date, end_time) 
-        girl_permission_required = girl_permission(enrollment_id)
-        
-        outpass_state = check_outpass_state(girl_permission_required, staff_permission_required)
-        
-        if form.is_valid():
-            outpass_object = save_outpass(enrollment_id, start_date,start_time, end_date, end_time, going_to, reason, girl_permission_required, staff_permission_required, outpass_state, outpass_save_mode )
+    success_url = "/outpass/success"
+
+
+#    def post(self, request, *args, **kwargs):
+    
+#        form = self.form_class(request.POST)
+#        going_to = request.POST['going_to']
+#        reason = request.POST['reason']
+#        outpass_save_mode = request.POST['outpass_save_mode']            
+#        start_time = create_time(request.POST['from_time'])
+#        end_time = create_time(request.POST['return_time'])
+#        start_date = create_date(request.POST['from_date'])
+#        end_date = create_date(request.POST['return_date'])
+#        enrollment_id = Student.objects.get(enrollment_id = self.request.user)
+#        outpass_generated = datetime.datetime.now()
+#        staff_permission_required = check_date(start_date,start_time, end_date, end_time) 
+#        girl_permission_required = girl_permission(enrollment_id)
+#        
+#        outpass_state = check_outpass_state(girl_permission_required, staff_permission_required)
+#        
+#        if form.is_valid():
+#            outpass_object = save_outpass(enrollment_id, start_date,start_time, end_date, end_time, going_to, reason, girl_permission_required, staff_permission_required, outpass_state, outpass_save_mode )
+#            
+#            outpass = Outpass.objects.get(outpass_id = outpass_object.outpass_id)
             
-            outpass = Outpass.objects.get(outpass_id = outpass_object.outpass_id)
-            
-            if outpass.outpass_state == "W":
-                message = return_message(outpass)
-                if girl_permission_required :
-                    hostel_staff = HostelStaff.objects.get(position = "Girls hostel warden")
-                    hostel_staff_message = HostelStaffMsg.objects.create(message = message, hostel_staff = hostel_staff, student = enrollment_id, outpass = outpass_object)
-                    hostel_staff_message.save()
-                    return HttpResponseRedirect("/profiles")
-                elif staff_permission_required :
-                    staff = StaffUser.objects.get(name  = "Vikas Thada")
-                    staff_message = StaffMsg.objects.create(message = message, staff = staff, student = enrollment_id, outpass = outpass_object )
-                    staff_message.save()
-                    return HttpResponseRedirect("/profiles")
+#            if outpass.outpass_state == "W":
+#                message = return_message(outpass)
+#                if girl_permission_required :
+#                    hostel_staff = HostelStaff.objects.get(position = "Girls hostel warden")
+#                    hostel_staff_message = HostelStaffMsg.objects.create(message = message, hostel_staff = hostel_staff, student = enrollment_id, outpass = outpass_object)
+#                    hostel_staff_message.save()
+#                    return HttpResponseRedirect("/profiles")
+#                elif staff_permission_required :
+#                    staff = StaffUser.objects.get(name  = "Vikas Thada")
+#                    staff_message = StaffMsg.objects.create(message = message, staff = staff, student = enrollment_id, outpass = outpass_object )
+#                    staff_message.save()
+#                    return HttpResponseRedirect("/profiles")
 #                email = EmailMessage('Hello',message, to = ['pulkitpahwa11@gmail.com'])
 #                email = EmailMessage('Hello',message, to = ['pulkitpahwa11@gmail.com'])
 #                email.send()
             #success_url = "/outpass/success"
-            else :
-                # send pdf of the outpass with the image in it
-                success_url = "/apple"
-            return HttpResponseRedirect('/outpass/success/')
-        else:
-            return HttpResponseRedirect('/outpass/failure/')
-
-# another method to do this, but dont know how to perform the email function,and where to call it
-#    def form_valid(self, form):
-#        form.instance.enrollment_id = Student.objects.get(enrollment_id = self.request.user)
-#        form.instance.outpass_generated = datetime.datetime.now()
-#        form.instance.staff_permission_required = check_date(form.instance.from_date,form.instance.from_time, form.instance.return_date, form.instance.return_time) 
-#        form.instance.girl_permission_required = girl_permission(Student.objects.get(enrollment_id = self.request.user))
-#        if form.instance.staff_permission_required or form.instance.girl_permission_required:
-#            form.instance.outpass_state = "W"
+#            else :
+#                # send pdf of the outpass with the image in it
+#                success_url = "/apple"
+#            return HttpResponseRedirect('/outpass/success/')
 #        else:
-#            form.instance.outpass_state = "P"
-#        # either send the message here or in the class, just before the success_url. try both ways
-#        return super(CreateOutpass, self).form_valid(form)
+#            form = 
+
+# another method to do this, but dont know how to perform the form validation and return the invalid form,and where to call it
+
+    def form_valid(self, form):
+        form.instance.enrollment_id = Student.objects.get(enrollment_id = self.request.user)
+        form.instance.outpass_generated = datetime.datetime.now()
+        form.instance.staff_permission_required = check_date(form.instance.from_date,form.instance.from_time, form.instance.return_date, form.instance.return_time) 
+        form.instance.girl_permission_required = girl_permission(Student.objects.get(enrollment_id = self.request.user))
+        outpass_state = check_outpass_state(form.instance.girl_permission_required, form.instance.staff_permission_required)        
+        
+        outpass_object = save_outpass(form.instance.enrollment_id, form.instance.from_date,form.instance.from_time, form.instance.return_date, form.instance.return_time, form.instance.going_to, form.instance.reason, form.instance.girl_permission_required, form.instance.staff_permission_required, outpass_state, form.instance.outpass_save_mode )
+    
+        outpass = Outpass.objects.get(outpass_id = outpass_object.outpass_id)
+        my_msg = "" 
+        if outpass.outpass_state == "W":
+            message = return_message(outpass)
+            if not form.instance.girl_permission_required :
+                hostel_staff = HostelStaff.objects.get(position = "Girls hostel warden")
+                hostel_staff_message = HostelStaffMsg.objects.create(message = message, hostel_staff = hostel_staff, student = form.instance.enrollment_id, outpass = outpass_object)
+                hostel_staff_message.save()
+                my_msg += "<br/>Permission from warden is required"
+            if form.instance.staff_permission_required :
+                staff = StaffUser.objects.get(name  = "Vikas Thada")
+                staff_message = StaffMsg.objects.create(message = message, staff = staff, student = form.instance.enrollment_id, outpass = outpass_object )
+                staff_message.save()
+                my_msg += "<br/>Permission from HOD or Mentor is required"
+            return HttpResponse("Your outpass is in waiting state. " + my_msg)
+            # this return statemenet is temporary.  Replace it with HttpResponseRedirect statement with msg in it.
+        else:
+            message = return_message(outpass)                       
+            if not (form.instance.girl_permission_required or form.instance.staff_permission_required):
+                hostel_staff = HostelStaff.objects.get(position = "Warden")
+                hostel_staff_message = HostelStaffMsg.objects.create(message = message, hostel_staff = hostel_staff, student = form.instance.enrollment_id, outpass = outpass_object)
+                hostel_staff_message.save()
+                return HttpResponse("Your outpass is ready to download.")
+            # this return statemenet is temporary.  Replace it with HttpResponseRedirect statement with msg in it.                
+    #                email = EmailMessage('Hello',message, to = ['pulkitpahwa11@gmail.com'])
+    #                email = EmailMessage('Hello',message, to = ['pulkitpahwa11@gmail.com'])
+    #                email.send()
+        # either send the message here or in the class, just before the success_url. try both ways
 
  
-def success(request):
-    a = get_template("outpas/permission_not_req.html") 
-    c = Context({})
-    html = a.render(c)
-    return HttpResponse(html)	
- 
-
-def failure(request):
-    a = get_template("outpas/permission_req.html") 
-    c = Context({})
-    html = a.render(c)
-    return HttpResponse(html)	
- 
-#def check(request):
-#   outpass = Outpass.objects.filter(enrollment_id = Student.objects.get(enrollment_id = request.user)).order_by(-"outpass_generated_at")[0]
-#   if outpass.outpass_state = W: send message, sorry your outpass cant be processed
-#   else : send SMS and pdf .
-
 
 @login_required
 def update_outpass(request):
     a = get_template("index.html")
-    enrollment_id = request.GET['username']
-    c = Context({'user':enrollment_id})
+    c = Context({})
     html = a.render(c)
     return HttpResponse(html)	
 

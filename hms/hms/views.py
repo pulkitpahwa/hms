@@ -8,6 +8,8 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
+from django.template.loader import get_template
+from django.template import Context,Template, RequestContext
 
 from profiles.models import Student
 from attendance.models import Holidays, Attendance
@@ -22,6 +24,16 @@ class StudentUpdate(UpdateView):
 
 class StudentList(ListView):
     model = Student
+
+#make this page different on the basis of the whether the user is student,staff or hostel staff
+@login_required
+def home(request):
+    holidays = Holidays.objects.all()[0:10]
+    user = Student.objects.get(enrollment_id = request.user).name
+    a = get_template("index.html")
+    c = Context({'holiday_list':holidays,'name':user})
+    html = a.render(c)
+    return HttpResponse(html)	
 
 
 #def staff_permission_received(request):

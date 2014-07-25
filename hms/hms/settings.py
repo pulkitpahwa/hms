@@ -15,13 +15,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'home',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'home',                      
         'USER': 'home',
         'PASSWORD': 'home',
-        'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '5432',                      # Set to empty string for default.
+        'HOST': 'localhost',                 
+        'PORT': '5432', 
     }
 }
 
@@ -35,12 +34,19 @@ SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-MEDIA_ROOT = ''
-MEDIA_URL = ''
-STATIC_ROOT = ''
+
+MEDIA_ROOT = os.path.join(SITE_ROOT, 'media') 
+MEDIA_URL = '/media/' 
+STATIC_ROOT = os.path.join(SITE_ROOT, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
+STATICFILES_DIRS = ( 
+    os.path.join(SITE_ROOT, 'staticfiles') ,
+) 
+
+TEMPLATE_DIRS = ( 
+    os.path.join(SITE_ROOT, 'templates') ,
 )
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -68,10 +74,6 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'hms.urls'
 
 WSGI_APPLICATION = 'hms.wsgi.application'
-
-TEMPLATE_DIRS = (
-    os.path.join(SITE_ROOT, 'templates') ,
-)
 
 INSTALLED_APPS = (
     'django.contrib.auth',

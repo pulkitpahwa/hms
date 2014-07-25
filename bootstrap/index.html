@@ -13,8 +13,7 @@
         }
         .button{
             padding:20px 0px 20px 0px;
-            margin-left:10%;
-            width:90%;
+            width:100%;
 
         }
 
@@ -33,16 +32,16 @@
                 margin-right:5%;
             }
         }
-            .notices-hidden{
-                margin-top:150px;
-                margin-left:9%;
-                width:85%;
-                height:200px;
-                background-color:yellow;
-                padding : 20px;
-                overflow-y:visible;
-            }
-        
+        .notices-hidden{
+            margin-top:150px;
+            margin-left:9%;
+            width:85%;
+            height:200px;
+            background-color:yellow;
+            padding : 20px;
+            overflow-y:visible;
+        }
+    
         
         .white-link{
             text-decoration:none;
@@ -60,29 +59,32 @@
             max-height:400px;
         }
 
-        .sidebar ul{
-            margin-top:30px;
-        }
-        .sidebar ul li{
+        
+       .sidebar ul a li{
             display:block;
             line-height:40px;
             margin-top:10px;
-            padding:5px 5% 5px 5%;
             border-radius : 5px;
         }
+        .sidebar ul a li{
+            padding-left:20px;
+        }
+        .sidebar ul li
+        {
+            list-style:none;
+        }
+        
 
         .sidebar a:hover li, .sidebar a:active li{
             background-color:#e1e2e4;
         }
         .sidebar ul a
         {
+            
+            padding:15px -2% 5px 2%;
             text-decoration:none;
         }
 
-        .sidebar-right ul{
-            height:400px;
-            overflow-y:scroll;
-        }
 
         .notices{
             width:90%;
@@ -91,59 +93,158 @@
             margin-top:100px;
             background-color:#e1e2e4;
         }
-
+        .footer{        
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 100px;
+            border-top: 1px solid #e5e5e5;
+            background-color: #f5f5f5;
+        }
+        footer{
+            display:block;
+        }
+        
+        .footer ul li{
+            display:inline-block;
+        }
     </style>
 
 </head>
 <body>
     <!---     Navigation bar    --->
- <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="./index.html">HostelZone</a>
-            <ul class="nav" style = "float:right;">
-              <li class="">
-                <a href="">Hello User</a>
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/">HostelZone</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav pull-right">
+              <li class="hidden-desktop hidden-table">
+                <a href="/outpass/create">Create Outpass</a>
+              </li>
+              <li class="hidden-desktop hidden-table">
+                <a href="/outpass/">Outpass History</a>
+              </li>
+              <li class="hidden-desktop hidden-table">
+                <a href="/attendance/">Attendance Details</a>
+              </li>
+              <li class="hidden-desktop hidden-table">
+                <a href="/profile/">My Profile</a>
+              </li>
+              <li class="hidden-desktop hidden-table">
+                <a href="/change-password">Change password</a>
               </li>
               <li class="">
-                <a href="">Logout</a>
+                <a href="">Welcome {{name}}</a>
+              </li>
+              <li class="">
+                <a href="/logout">Logout</a>
               </li>
             </ul>
+          </div>
         </div>
       </div>
-  </div>
+    </div>
+
 
   <!--  Left sidebar for the desktop and tablet versions  -->
   <div class="container-fluid top" >
         <div class="row-fluid">
-            <div class="span hidden-phone" style = "@media(max-width:1400px){display:none;}"></div>
             <!-- left sidebar. Contains the navigation features -->
-            <div class="span2 sidebar" style = "height:400px" >
-                <button type="button" class="btn btn-success btn-large button"> 
-                    <a href="" class = "white-link" > Create  </a>
-                </button>
+            <div class="span3 sidebar hidden-phone " style = "height:100%" >
+           
                 
                 <ul>
-                    <a href=""><li>History</li></a>
-                    <a href="index.html"><li>Attendance</li></a>
-                    <a href=""><li>Profile</li></a>
-                    <a href="" class = "hidden-phone"><li>Logout</li></a>
-                    <li class = "hidden-phone"><img src="img/book.png" alt="" /><li>
+                    <li><button type="button" class="btn btn-success btn-large button"> 
+                        <a href="" class = "white-link" > Create  </a>
+                    </button></li>
+                    <a href="/"><li>Home</li></a>
+                    <a href="/outpass/"><li>History</li></a>
+                    <a href="/attendance/"><li>Attendance</li></a>
+                    <a href="/profile/"><li>Profile</li></a>
+                    <a href="/logout/" ><li>Logout</li></a>
+                    <li style = "margin-top:20px;"><center><img src="img/book.png" alt="" /></center><li>
                 </ul>
             
             </div>
             <!-- center container. Will contain the calendar -->
 
-            <div class="span6 hidden-phone" style = "height:400px"> this will contain the calendar</div>
+            <div class="span6"> 
+                <div class="span12" style = "height:400px"> this will contain the calendar</div>
+                
+                <div class="span12 hidden-phone" style = "height:100%;border:2px solid black;border-radius:5px;padding-top:0px;">
+                    <div style = "background-color:#0044cc; width:100%;height:50px; color:white;margin-top:-10px;border-bottom:2px solid #0f63b2;">
+                    <h3>
+                        <center>Notices</center>
+                    </h3>
+                </div>
+                    <ul style = "overflow-y:scroll;height:180px;margin-top:10px;">
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                    </ul>
+                </div>
+                <div class="span12 hidden-desktop hidden-tablet" >
+                    <div style = "background-color:#0044cc;width:100%;height:50px;color:white;margin-top:-10px;border-bottom:2px solid #0f63b2;">
+                    <h3>
+                        <center>Notices</center>
+                    </h3>
+                </div>
 
+                    <ul>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                        <li>10th July, 2014</li>
+                    </ul>
+                </div>
+            
+            </div>
+            
             <!-- Right sidebar. Will contain the list of holidays scrollbar -->
-            <div class="span3 sidebar sidebar-right hidden-phone">
-
-                <h2>
-                    <center>Upcoming Holidays</center>
-                </h2>
-
-                <ul>
+            <div class="span3 hidden-phone" style = "border:2px solid #0f63b2;border-radius:5px;">
+                <div style = "background-color:#0044cc;width:100%;height:50px;color:white;margin-top:-10px;border-bottom:2px solid #0f63b2;">
+                    <h3>
+                        <center>Messages</center>
+                    </h3>
+                </div>
+                <ul style = "margin-top:20px;">
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    
+                </ul>
+                <div style = "background-color:#0044cc;width:100%;height:50px;color:white;">
+                    <h3>
+                        <center>Upcoming Holidays</center>
+                    </h3>
+                </div>
+                <ul style = "margin-top:20px;">
                     <li>10th July, 2014</li>
                     <li>10th July, 2014</li>
                     <li>10th July, 2014</li>
@@ -159,13 +260,25 @@
                     <li>10th July, 2014</li>
                 </ul>
             </div>
-            <div class="span3 sidebar hidden-tablet hidden-desktop ">
-
-                <h2>
-                    <center>Upcoming Holidays</center>
-                </h2>
-
-                <ul>
+            <div class="span3 hidden-tablet hidden-desktop ">
+                <div style = "background-color:#0044cc;width:100%;height:50px;color:white;margin-top:10px;">
+                    <h3>
+                        <center>Messages</center>
+                    </h3>
+                </div>
+                <ul style = "margin-top:20px;">
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+                    <li>10th July, 2014</li>
+ 
+                </ul>
+                <div style = "background-color:#0044cc;width:100%;height:50px;color:white;margin-top:10px;">
+                    <h3>
+                        <center>Upcoming Holidays</center>
+                    </h3>
+                </div>
+                <ul style = "margin-top:20px;">
                     <li>10th July, 2014</li>
                     <li>10th July, 2014</li>
                     <li>10th July, 2014</li>
@@ -177,9 +290,23 @@
                 </ul>
             </div>
         </div>
-        <div class="span12 notices hidden-phone" ></div>
-        <div class="span12 notices-hidden hidden-tablet hidden-desktop" ></div>
-    </div>
+   </div>
+    <!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+        <p>Designed and built with all the love in the world by <a href="http://twitter.com/mdo" target="_blank">@mdo</a> and <a href="http://twitter.com/fat" target="_blank">@fat</a>.</p>
+        <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        <ul class="footer-links">
+          <li><a href="http://blog.getbootstrap.com">Blog</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="https://github.com/twbs/bootstrap/issues?state=open">Issues</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="https://github.com/twbs/bootstrap/releases">Changelog</a></li>
+        </ul>
+      </div>
+    </footer>
 
 </body>
 <script type="text/javascript" src = "js/jquery.min.js"></script>

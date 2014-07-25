@@ -1,0 +1,34 @@
+{% extends  "base.html" %}
+{% block ninespan %}
+<div class="span9">
+
+    <table style = "line-height:1.5">
+        <tr>
+            <th style = "border:1px solid black;width:15%;">Date</th>
+            <th style = "border:1px solid black;width:15%;">Present</th>
+            <th style = "border:1px solid black;width:15%;">Absent</th>
+            <th style = "border:1px solid black;width:15%;">Outpass</th>
+        </tr>
+        {% load static from staticfiles%}
+        {% for day in daily %}
+        <tr>
+            <td style = "border:1px solid black;">{{day.date}}</td>
+            <td style = "border:1px solid black;">
+                {% if day.present %}
+                <center><img src="{%static 'img/icon_success.gif'%}" alt="" /></center>
+                {% else %}
+                <center><img src="{%static 'img/icon-no.gif'%}" alt="" /></center>
+                {%endif%}
+            </td>
+            <td style = "border:1px solid black;">{%if day.absent %} <!--include a sad smiley icon here-->
+                <center><img src="{%static 'img/icon_success.gif'%}" alt="" /></center>
+                {%else%}
+                <center><img src="{%static 'img/icon-no.gif'%}" alt="" /></center>
+                {%endif%}
+            </td>
+            <td style = "border:1px solid black;">{{day.outpass}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        function checktime()
+        {
+        
+            var start_time = document.getElementById("id_from_time").value;
+            var end_time = document.getElementById("id_return_time").value;
+            var start_date = document.getElementById("id_from_date").value;
+            var end_date = document.getElementById("id_return_date").value;
+
+
+            if(Date.parse(start_date + start_time) > Date.parse(end_date + end_time)
+            {
+                alert("End time should exceed the start time");
+            }
+            return false;
+        }
+    
+    
+    
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
