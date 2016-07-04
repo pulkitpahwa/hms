@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Hms by pulkitpahwa</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/pulkitpahwa/hms">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/pulkitpahwa/hms/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/pulkitpahwa/hms/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Hms</h1>
+          <p>HMS is a django-based web app to maintain the attendance of hostelers and also generate their outpass on the run</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/pulkitpahwa">pulkitpahwa</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h2>
+<a id="hostel-leave-management-project" class="anchor" href="#hostel-leave-management-project" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>HOSTEL LEAVE MANAGEMENT PROJECT</h2>
+
+<h3>
+<a id="problem-that-were-faced-earlier-" class="anchor" href="#problem-that-were-faced-earlier-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Problem that were faced earlier :</h3>
+
+<ul>
+<li>Difficulty in getting an outpass</li>
+<li>A lot much office work for the hostel staff</li>
+<li>Manual errors while merging the attendance record with outpass record</li>
+<li>Sending SMS manually to the parents of those students who are not present in the hostel and are not on outpass too</li>
+<li>Sometimes SMS is sent to wrong users, who are not ought to receive that message</li>
+</ul>
+
+<h3>
+<a id="solution-" class="anchor" href="#solution-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Solution :</h3>
+
+<ul>
+<li>An online outpass management web app that students can use anytime, from anywhere to generate outpass </li>
+<li>The web app will take attendance from biometric reader and will update it record daily and will automatically find out the students who are absent from the hostel without permission</li>
+<li>Sending SMS automatically on a single click(Require warden's permission)</li>
+<li>Proper security features to ensure data backup and security</li>
+<li>Update would be sent to warden's account and other staff's account when an outpass is issued</li>
+<li>Outpass would be generated either as SMS (providing necessary information about the outpass ) that could be sent to student's account or could be downloaded as a pdf file, thus saving the paper consumption.</li>
+<li>Records monitoring tool to allow staff members to get custom results</li>
+</ul>
+
+<h3>
+<a id="database-table-" class="anchor" href="#database-table-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Database Table :</h3>
+
+<ul>
+<li>
+<p><em>Student Info</em> : To maintain student information including :</p>
+
+<ul>
+<li>Student's name</li>
+<li>Enrollment Number : Permanent Key</li>
+<li>Course enrolled</li>
+<li>Batch</li>
+<li>Phone Number</li>
+<li>Permanent Address</li>
+<li>Father's Name</li>
+<li>Mother's Name</li>
+<li>Local Guardian Name</li>
+<li>Parent's contact Number</li>
+<li>Hostel address</li>
+<li>Local Guardian's address</li>
+<li>Local Guardian's Contact Number</li>
+<li>Photo</li>
+<li>Email Id</li>
+<li>Sex</li>
+</ul>
+</li>
+<li>
+<p><em>Attendance table</em> : Will maintain daily attendance corresponding the enrollment number of students. Fields of this table are:</p>
+
+<ul>
+<li>Enrollment Number : Foreign key(Student Table)</li>
+<li>Date</li>
+<li>Attendance : Present/ Absent</li>
+<li>Function(method) : LeaveRecord or NotPresent: Not stored in models.py file. Stored at other location. Will be used to generate the list of leave of a particular student. </li>
+<li>Function(method) : AbsentRecord : Will be used to generate the dates when the student was absent from the hostel and also didn't have the outpass issued</li>
+<li>Function(method) : OnOutpass : Returns the dates when the student was not present in the hostel and had the outpass issued</li>
+</ul>
+</li>
+<li><p><em>HOLIDAYS</em> : Will contain list of holidays. Holidays can be added and deleted</p></li>
+<li>
+<p><em>OUTPASS</em> : This model will be used to generate the outpass and store the details related to every outpass generated. Fields are:</p>
+
+<ul>
+<li>Enrollment Number</li>
+<li>Outpass Id : Primary Key, Auto Increment or AutoKey</li>
+<li>From Date : from when</li>
+<li>To Date : till when</li>
+<li>Time of leaving</li>
+<li>Expected time of return</li>
+<li>Function(method) : PermissionRequired : Will check if there is a need to require permission from the warden, HOD, etc.. It will make use of the holidays table</li>
+<li>Function(method) : Girl Hostel Permission : This function checks using the enrollment number, whether the student is male or female. If the student is female, they require permission from warden, which would be checked from warden account.</li>
+</ul>
+
+<p>In case of the above 2 functions, the outpass won't be issued unless the permission is recieved</p>
+</li>
+</ul>
+
+<h1>
+<a id="challenge" class="anchor" href="#challenge" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Challenge</h1>
+
+<pre><code>* How to send request to grant permission
+* How to recieve permission
+* How to save the outpass in waiting state
+</code></pre>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
